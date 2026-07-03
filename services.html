@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | Flame Grill Restaurant</title>
+  <!-- Font Awesome (social icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- Google Fonts (Poppins + Playfair) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ----- YOUR THEME VARIABLES (global) ----- */
+    :root {
+      --bg: #0b0b0b;
+      --surface: #151515;
+      --surface-2: #1f1f1f;
+      --text: #ffffff;
+      --muted: #b8b8b8;
+      --accent: #d62828;
+      --accent-soft: rgba(214, 40, 40, 0.16);
+      --gold: #f4a261;
+      --border: rgba(255,255,255,0.1);
+      --shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+
+    body.dark {
+      --bg: #f5f3ee;
+      --surface: #ffffff;
+      --surface-2: #f0ebe4;
+      --text: #111111;
+      --muted: #4d4d4d;
+      --accent: #d62828;
+      --gold: #b46a1d;
+      --border: rgba(17,17,17,0.08);
+      --shadow: 0 20px 50px rgba(0,0,0,0.08);
+    }
+
+    /* ----- RESET & BASE ----- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.2s, color 0.2s;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button, input, select, textarea { font: inherit; }
+    .container { width: min(1200px, calc(100% - 2rem)); margin: 0 auto; }
+    .section { padding: 4rem 0; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 2.2vw, 2.6rem); margin-bottom: 0.75rem; }
+    .section-intro { color: var(--muted); max-width: 700px; margin-bottom: 2rem; }
+
+    /* ----- BUTTONS ----- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.5rem; padding: 0.7rem 1.3rem; border-radius: 999px; border: 1px solid transparent;
+      cursor: pointer; transition: 0.25s ease; font-weight: 600;
+      background: transparent; color: var(--text);
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), #ff4d4d); color: white; box-shadow: var(--shadow); }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+    .btn-outline { border-color: var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-ghost { background: rgba(255,255,255,0.08); color: var(--text); }
+
+    /* ----- HEADER / NAV (sticky, with your theme) ----- */
+    .site-header {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(11,11,11,0.75); backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    body.dark .site-header { background: rgba(245,243,238,0.8); }
+
+    .nav-wrap {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 78px; gap: 1rem;
+    }
+    .logo { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; letter-spacing: 0.04em; }
+    .logo span { color: var(--accent); }
+
+    .main-nav { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .main-nav a, .dropbtn {
+      color: var(--text); background: transparent; border: 0;
+      padding: 0.45rem 0; font-weight: 400; letter-spacing: 0.01em;
+      cursor: pointer; transition: color 0.2s;
+    }
+    .main-nav a:hover, .dropbtn:hover { color: var(--accent); }
+    .main-nav a.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+
+    /* DROPDOWN - stable */
+    .dropdown { position: relative; display: inline-block; }
+    .dropdown-menu {
+      position: absolute; top: calc(100% + 0.7rem); left: 0;
+      min-width: 190px; padding: 0.7rem 0.5rem;
+      border-radius: 16px; background: var(--surface);
+      border: 1px solid var(--border); box-shadow: var(--shadow);
+      display: none; flex-direction: column; z-index: 200;
+    }
+    /* show on hover or when .open (for click) */
+    .dropdown:hover .dropdown-menu,
+    .dropdown.open .dropdown-menu { display: flex; }
+    .dropdown-menu a { padding: 0.45rem 0.9rem; color: var(--text); }
+    .dropdown-menu a:hover { color: var(--accent); background: var(--accent-soft); border-radius: 10px; }
+
+    .nav-actions { display: flex; align-items: center; gap: 0.7rem; }
+    .search-form {
+      display: flex; align-items: center; gap: 0.3rem;
+      padding: 0.4rem 0.8rem; border: 1px solid var(--border);
+      border-radius: 999px;
+    }
+    .search-form input { border: 0; outline: none; background: transparent; color: var(--text); width: 110px; }
+    .theme-toggle, .menu-toggle {
+      border: 0; background: transparent; color: var(--text);
+      cursor: pointer; font-size: 1.2rem;
+    }
+    .menu-toggle { display: none; }
+    .mobile-nav { display: none; flex-direction: column; gap: 0.8rem; padding: 1rem 0 1.2rem; border-top: 1px solid var(--border); }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { padding: 0.4rem 0; }
+
+    /* ----- HERO (page hero, consistent) ----- */
+    .page-hero {
+      padding: 4rem 0 3rem;
+      background: linear-gradient(90deg, rgba(0,0,0,0.75), rgba(0,0,0,0.3)),
+                  url('https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=1400&q=80') center/cover;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4vw, 3.4rem); margin-bottom: 0.5rem; }
+    .page-hero p { color: #e0e0e0; max-width: 700px; font-size: 1.1rem; }
+
+    /* ----- CARDS GRID (services) ----- */
+    .cards-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 24px; padding: 1.8rem 1.5rem;
+      box-shadow: var(--shadow); transition: 0.25s ease;
+    }
+    .card:hover { transform: translateY(-6px); }
+    .card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .card p { color: var(--muted); }
+
+    /* ----- FOOTER (with your theme) ----- */
+    .footer {
+      padding: 3rem 0 2rem; border-top: 1px solid var(--border);
+      background: var(--surface); margin-top: 2rem;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 2rem; align-items: start;
+    }
+    .footer-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 0.8rem; }
+    .footer-text { color: var(--muted); margin: 0.7rem 0 0; }
+    .footer-links { display: flex; flex-direction: column; gap: 0.45rem; color: var(--muted); }
+    .footer-links a:hover { color: var(--accent); }
+    .socials { display: flex; gap: 0.7rem; margin-top: 1rem; }
+    .socials a {
+      width: 40px; height: 40px; display: grid; place-items: center;
+      background: var(--surface-2); border-radius: 50%; color: var(--text);
+      transition: 0.25s ease;
+    }
+    .socials a:hover { background: var(--accent); color: white; transform: translateY(-2px); }
+    .copyright {
+      padding-top: 1.5rem; margin-top: 2rem;
+      border-top: 1px solid var(--border); color: var(--muted);
+      font-size: 0.9rem; text-align: center;
+    }
+
+    /* ----- RESPONSIVE ----- */
+    @media (max-width: 960px) {
+      .main-nav, .nav-actions .btn, .nav-actions .search-form { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .mobile-nav { display: none; }
+      .mobile-nav.open { display: flex; }
+      .cards-grid, .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .cards-grid, .footer-grid { grid-template-columns: 1fr; }
+      .page-hero { padding: 3rem 0 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER (with stable dropdown) ===== -->
+<header class="site-header" id="top">
+  <div class="container nav-wrap">
+    <a class="logo" href="index.html"><span>Flame</span> Grill</a>
+
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="menu.html">Menu</a>
+      <a href="reservation.html">Reservations</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+
+      <!-- SERVICES DROPDOWN (stable: hover + click) -->
+      <div class="dropdown" id="servicesDropdown">
+        <a href="services.html" class="active drop-link">Services</a>
+        <button class="dropbtn" aria-expanded="false" aria-label="Toggle services menu">▾</button>
+        <div class="dropdown-menu" id="dropdownMenu">
+          <a href="events.html">Catering</a>
+          <a href="events.html">Events</a>
+          <a href="checkout.html">Delivery</a>
+          <a href="tracking.html">Tracking</a>
+          <a href="testimonials.html">Testimonials</a>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="online-ordering.html">Online-Ordering</a>
+          <a href="faq.html">Faq</a>
+          <a href="events.html">Event</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="404.html">404</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">☀️</button>
+      <a class="btn btn-ghost" href="login.html">Login</a>
+      <a class="btn btn-outline" href="register.html">Register</a>
+      <a class="btn btn-primary" href="reservation.html">Book Table</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+
+  <!-- Mobile nav -->
+  <div class="container mobile-nav" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="menu.html">Menu</a>
+    <a href="reservation.html">Reservations</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="login.html">Login</a>
+    <a href="register.html">Register</a>
+  </div>
+</header>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Our <span style="color: var(--accent);">Services</span></h1>
+    <p>From catering and events to delivery and tracking — we bring the flame to your table.</p>
+  </div>
+</section>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main>
+  <section class="section">
+    <div class="container">
+      <div class="section-title">Premium Offerings</div>
+      <p class="section-intro">Explore catering, events, delivery, and more with Flame Grill.</p>
+
+      <div class="cards-grid">
+        <article class="card">
+          <h3>🍖 Catering</h3>
+          <p>Custom menus for weddings, corporate events, and private gatherings.</p>
+        </article>
+        <article class="card">
+          <h3>🎉 Events</h3>
+          <p>Full-service event planning with premium flame-grilled dining.</p>
+        </article>
+        <article class="card">
+          <h3>🚚 Delivery</h3>
+          <p>Freshly prepared meals delivered hot to your door.</p>
+        </article>
+        <article class="card">
+          <h3>📦 Tracking</h3>
+          <p>Real-time order tracking for deliveries and catering.</p>
+        </article>
+        <article class="card">
+          <h3>⭐ Testimonials</h3>
+          <p>Hear from our happy guests and partners.</p>
+        </article>
+        <article class="card">
+          <h3>📅 Private Dining</h3>
+          <p>Exclusive chef's table experiences for intimate groups.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== FOOTER (with your theme) ===== -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="logo" href="index.html"><span>Flame</span> Grill</a>
+      <p class="footer-text" style="margin-top: 1rem;">Premium BBQ dining, crafted grills, and warm hospitality for every occasion.</p>
+      <div class="socials">
+        <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+    <div>
+      <h3 class="footer-title">Quick Links</h3>
+      <div class="footer-links">
+        <a href="about.html">About Us</a>
+        <a href="menu.html">Our Menu</a>
+        <a href="reservation.html">Reservations</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div>
+      <h3 class="footer-title">Opening Hours</h3>
+      <div class="footer-links">
+        <span>Mon-Thu: 4pm – 11pm</span>
+        <span>Fri-Sat: 4pm – 12am</span>
+        <span>Sunday: 4pm – 10pm</span>
+      </div>
+    </div>
+    <div>
+      <h3 class="footer-title">Newsletter</h3>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+    </div>
+  </div>
+  <div class="container copyright">© 2026 Flame Grill Restaurant. All rights reserved.</div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+  (function() {
+    // ---- Theme toggle (dark/light) ----
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark');
+        this.textContent = document.body.classList.contains('dark') ? '🌙' : '☀️';
+      });
+    }
+
+    // ---- Mobile menu toggle ----
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    if (menuToggle && mobileNav) {
+      menuToggle.addEventListener('click', function() {
+        mobileNav.classList.toggle('open');
+        this.textContent = mobileNav.classList.contains('open') ? '✕' : '☰';
+      });
+    }
+
+    // ---- STABLE DROPDOWN (hover + click) ----
+    const dropdown = document.getElementById('servicesDropdown');
+    const dropBtn = dropdown?.querySelector('.dropbtn');
+    const dropMenu = document.getElementById('dropdownMenu');
+
+    if (dropdown && dropBtn && dropMenu) {
+      // 1) click toggles .open class (works on touch / click)
+      dropBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+        // update aria-expanded
+        const isOpen = dropdown.classList.contains('open');
+        dropBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      // 2) close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove('open');
+          dropBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // 3) prevent closing when hovering over dropdown (mouse) – 
+      // we keep CSS :hover active, but we also ensure that if .open is removed by click outside, it's fine.
+      // Also, we want to close when mouse leaves if not .open? Actually we keep both: 
+      // on hover it shows (thanks to :hover), on click it toggles .open.
+      // But to avoid conflict, we do nothing else.
+    }
+
+    // ---- Close mobile nav on link click (optional) ----
+    const mobileLinks = mobileNav?.querySelectorAll('a');
+    mobileLinks?.forEach(link => {
+      link.addEventListener('click', function() {
+        mobileNav.classList.remove('open');
+        if (menuToggle) menuToggle.textContent = '☰';
+      });
+    });
+
+  })();
+</script>
+
+<!-- small note: the dropdown is stable via :hover and .open class -->
+</body>
+</html>

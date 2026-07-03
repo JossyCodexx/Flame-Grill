@@ -1,0 +1,18 @@
+:root { --mobile: 640px; }
+@media (max-width: 960px) {
+  .hero-stats, .stats-grid, .menu-grid, .cards-grid, .gallery-grid, .testimonial-grid, .blog-grid, .chef-grid, .dashboard-grid, .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .about-grid, .contact-grid, .checkout-grid { grid-template-columns: 1fr; }
+  .main-nav, .nav-actions .btn, .nav-actions .search-form { display: none; }
+  .menu-toggle { display: inline-flex; }
+  .mobile-nav { display: none; flex-direction: column; gap: 0.8rem; padding: 1rem 0 1.2rem; border-top: 1px solid var(--border); }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a, .mobile-nav button { padding: 0.6rem 0; }
+}
+
+@media (max-width: 640px) {
+  .hero { min-height: 90vh; }
+  .hero-stats, .stats-grid, .menu-grid, .cards-grid, .gallery-grid, .testimonial-grid, .blog-grid, .chef-grid, .dashboard-grid, .footer-grid { grid-template-columns: 1fr; }
+  .hero-actions, .newsletter, .offer-banner { flex-direction: column; align-items: start; }
+  .newsletter input { min-width: 100%; }
+  .form-row { grid-template-columns: 1fr; }
+}

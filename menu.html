@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu | Flame Grill Restaurant</title>
+    <meta name="description" content="Explore our premium menu with beef grills, steaks, seafood, desserts, and drinks." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+  </head>
+  <body>
+    <div class="loading-screen"><div class="loader"></div></div>
+
+    
+    
+    <header class="site-header" id="top">
+    <div class="container nav-wrap">
+     <a class="logo" href="index.html"><span>Flame</span> Grill</a>
+     <nav class="main-nav" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="menu.html">Menu</a>
+      <a href="reservation.html">Reservations</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+      <div class="dropdown">
+        <a href="services.html" class="drop-link">Services</a>
+        <button class="dropbtn" aria-expanded="false" aria-label="Toggle services menu">▾</button>
+        <div class="dropdown-menu" hidden>
+          <a href="events.html">Catering</a>
+          <a href="events.html">Events</a>
+          <a href="checkout.html">Delivery</a>
+          <a href="tracking.html">Tracking</a>
+          <a href="testimonials.html">Testimonials</a>
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="online-ordering.html">Online-Ordering</a>
+          <a href="faq.html">Faq</a>
+          <a href="events.html">Event</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="404.html">404</a>
+        </div>
+      </div>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☀️</button>
+      <a class="btn btn-ghost" href="login.html">Login</a>
+      <a class="btn btn-outline" href="register.html">Register</a>
+      <a class="btn btn-primary" href="reservation.html">Book Table</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+  <div class="container mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="menu.html">Menu</a>
+    <a href="reservation.html">Reservations</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a href="services.html">Services</a>
+    <a href="login.html">Login</a>
+    <a href="register.html">Register</a>
+  </div>
+</header>
+
+
+    <main>
+      <section class="page-hero">
+        <div class="container" data-aos="fade-up">
+          <h1>Signature Menu</h1>
+          <p>Discover a curated selection of premium grilled dishes, comfort sides, and indulgent desserts.</p>
+        </div>
+      </section>
+      <section class="section container">
+        <div class="filter-row" data-aos="fade-up">
+          <a class="filter-btn active" href="menu.html">All</a>
+          <a class="filter-btn" href="fish-grills.html">Fish Grills</a>
+          <a class="filter-btn" href="meat-grill.html">Meat Grill</a>
+          <a class="filter-btn" href="crocodile-grills.html">Crocodile Grills</a>
+          <a class="filter-btn" href="cow-grill.html">Cow Grill</a>
+          <a class="filter-btn" href="goat-grill.html">Goat Grill</a>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Smoked BBQ Platter.jpg" alt="Smoked BBQ platter" loading="lazy" /><div class="badge">Meat Grill</div><h3>Smoked BBQ Platter</h3><p>Ribs, brisket, and grilled chicken with smoky sauces.</p><div class="meta-row"><span class="price">$29</span><span>★★★★★</span></div><div class="meta-row"><span>980 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Smoked BBQ Platter" data-price="29">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Firehouse Steak.jpg" alt="Firehouse steak" loading="lazy" /><div class="badge">Cow Grill</div><h3>Firehouse Steak</h3><p>Prime cut with garlic butter and pepper crust.</p><div class="meta-row"><span class="price">$34</span><span>★★★★★</span></div><div class="meta-row"><span>910 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Firehouse Steak" data-price="34">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Smoky Burger.jpg.jpg" alt="Smoky burger" loading="lazy" /><div class="badge">Meat Grill</div><h3>Smoky Burger</h3><p>Double patty with cheddar, onion jam, and pickles.</p><div class="meta-row"><span class="price">$16</span><span>★★★★★</span></div><div class="meta-row"><span>760 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Smoky Burger" data-price="16">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Ocean Grill.jpg" alt="Ocean grill" loading="lazy" /><div class="badge">Fish Grills</div><h3>Ocean Grill</h3><p>Salmon, shrimp, and lemon herb butter.</p><div class="meta-row"><span class="price">$28</span><span>★★★★★</span></div><div class="meta-row"><span>720 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Ocean Grill" data-price="28">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Crocodile Skewers.jpg" alt="Crocodile rib skewers" loading="lazy" /><div class="badge">Crocodile Grills</div><h3>Crocodile Skewers</h3><p>Chargrilled crocodile bites with citrus glaze.</p><div class="meta-row"><span class="price">$39</span><span>★★★★★</span></div><div class="meta-row"><span>860 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Crocodile Skewers" data-price="39">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Goat BBQ Rack.jpg" alt="Goat grill" loading="lazy" /><div class="badge">Goat Grill</div><h3>Goat BBQ Rack</h3><p>Slow-roasted goat ribs with smoky spice rub.</p><div class="meta-row"><span class="price">$32</span><span>★★★★★</span></div><div class="meta-row"><span>900 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Goat BBQ Rack" data-price="32">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Beef Rib Grill.jpg" alt="Beef rib grill" loading="lazy" /><div class="badge">Cow Grill</div><h3>Beef Rib Grill</h3><p>Smoky beef ribs with house BBQ sauce.</p><div class="meta-row"><span class="price">$31</span><span>★★★★★</span></div><div class="meta-row"><span>950 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Beef Rib Grill" data-price="31">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Lobster Grill.jpg" alt="Lobster grill" loading="lazy" /><div class="badge">Fish Grills</div><h3>Lobster Grill</h3><p>Butter-glazed lobster tail with herb char.</p><div class="meta-row"><span class="price">$42</span><span>★★★★★</span></div><div class="meta-row"><span>780 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Lobster Grill" data-price="42">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Golden Chicken Grill.jpg" alt="Chicken grill" loading="lazy" /><div class="badge">Meat Grill</div><h3>Golden Chicken Grill</h3><p>Juicy chicken with citrus marinade and fire-roasted edges.</p><div class="meta-row"><span class="price">$18</span><span>★★★★★</span></div><div class="meta-row"><span>740 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Golden Chicken Grill" data-price="18">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Seafood Skillet.jpg" alt="Seafood grill" loading="lazy" /><div class="badge">Fish Grills</div><h3>Seafood Skillet</h3><p>Mixed prawns, scallops, and mussels with garlic butter.</p><div class="meta-row"><span class="price">$30</span><span>★★★★★</span></div><div class="meta-row"><span>710 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Seafood Skillet" data-price="30">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Sirloin Flame Cut.jpg" alt="Cow sirloin" loading="lazy" /><div class="badge">Cow Grill</div><h3>Sirloin Flame Cut</h3><p>Premium sirloin with rosemary jus and smoked pepper.</p><div class="meta-row"><span class="price">$37</span><span>★★★★★</span></div><div class="meta-row"><span>880 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Sirloin Flame Cut" data-price="37">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Goat Kebab Plate.jpg" alt="Goat kebabs" loading="lazy" /><div class="badge">Goat Grill</div><h3>Goat Kebab Plate</h3><p>Succulent goat kebabs with grilled onions and mint sauce.</p><div class="meta-row"><span class="price">$26</span><span>★★★★★</span></div><div class="meta-row"><span>840 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Goat Kebab Plate" data-price="26">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Crocodile Steak.jpg" alt="Crocodile steak" loading="lazy" /><div class="badge">Crocodile Grills</div><h3>Crocodile Steak</h3><p>Lean grilled crocodile steak with smoked paprika glaze.</p><div class="meta-row"><span class="price">$41</span><span>★★★★★</span></div><div class="meta-row"><span>790 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Crocodile Steak" data-price="41">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Salmon Fire Grill.jpg" alt="Salmon grill" loading="lazy" /><div class="badge">Fish Grills</div><h3>Salmon Fire Grill</h3><p>Perfectly charred salmon with lemon dill butter.</p><div class="meta-row"><span class="price">$27</span><span>★★★★★</span></div><div class="meta-row"><span>770 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Salmon Fire Grill" data-price="27">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Classic Beef Grill.jpg" alt="Beef burger" loading="lazy" /><div class="badge">Cow Grill</div><h3>Classic Beef Grill</h3><p>Thick beef burger served with charred onion and cheddar.</p><div class="meta-row"><span class="price">$19</span><span>★★★★★</span></div><div class="meta-row"><span>820 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Classic Beef Grill" data-price="19">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Herb Goat Grill.jpg" alt="Mutton grill" loading="lazy" /><div class="badge">Goat Grill</div><h3>Herb Goat Grill</h3><p>Marinated goat chops with roasted garlic and herbs.</p><div class="meta-row"><span class="price">$24</span><span>★★★★★</span></div><div class="meta-row"><span>850 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Herb Goat Grill" data-price="24">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Fire Wings.jpg" alt="Chicken wings" loading="lazy" /><div class="badge">Meat Grill</div><h3>Fire Wings</h3><p>Spicy chargrilled wings with smoked dip.</p><div class="meta-row"><span class="price">$15</span><span>★★★★★</span></div><div class="meta-row"><span>690 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Fire Wings" data-price="15">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Crocodile Bites.jpg" alt="Crocodile bites" loading="lazy" /><div class="badge">Crocodile Grills</div><h3>Crocodile Bites</h3><p>Mini crocodile meat bites with pepper glaze.</p><div class="meta-row"><span class="price">$22</span><span>★★★★★</span></div><div class="meta-row"><span>780 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Crocodile Bites" data-price="22">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Mixed Grill Plate.jpg" alt="Mixed grill plate" loading="lazy" /><div class="badge">Meat Grill</div><h3>Mixed Grill Plate</h3><p>Beef, chicken, and goat served with house sides.</p><div class="meta-row"><span class="price">$35</span><span>★★★★★</span></div><div class="meta-row"><span>940 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Mixed Grill Plate" data-price="35">Add to Cart</button></div></article>
+          <article class="menu-card" data-aos="fade-up"><img src="./images/Tilapia Flame Grill.jpg" alt="Tilapia grill" loading="lazy" /><div class="badge">Fish Grills</div><h3>Tilapia Flame Grill</h3><p>Grilled tilapia with herbed tomato relish.</p><div class="meta-row"><span class="price">$21</span><span>★★★★★</span></div><div class="meta-row"><span>730 kcal</span><button class="btn btn-outline add-to-cart-btn" data-name="Tilapia Flame Grill" data-price="21">Add to Cart</button></div></article>
+        </div>
+        <div class="menu-cart-footer" id="menu-cart-footer">
+          <span id="menu-cart-count">0 item(s)</span>
+          <a class="btn btn-primary" href="checkout.html">View Checkout</a>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="logo" href="index.html"><span>Flame</span> Grill</a>
+          <p style="color:var(--muted); margin-top:1rem;">Premium grilled dishes, smoky flavors, and unforgettable hospitality.</p>
+          <div class="socials" style="margin-top:1rem;">
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+        <div>
+          <h3>Quick Links</h3>
+          <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="reservation.html">Reservations</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h3>Opening Hours</h3>
+          <div class="footer-links">
+            <span>Mon-Thu: 4pm - 11pm</span>
+            <span>Fri-Sat: 4pm - 12am</span>
+            <span>Sunday: 4pm - 10pm</span>
+          </div>
+        </div>
+        <div>
+          <h3>Stay Connected</h3>
+          <div class="footer-links">
+            <a href="faq.html">FAQ</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+          </div>
+        </div>
+      </div>
+      <div class="container copyright">© 2026 Flame Grill Restaurant. All rights reserved.</div>
+    </footer>
+    <div class="cart-toast" id="cart-toast" aria-live="polite"></div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
