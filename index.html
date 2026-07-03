@@ -1,261 +1,787 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flame Grill Restaurant | Premium Grill & BBQ</title>
-    <meta name="description" content="Flame Grill Restaurant offers premium flame-grilled dishes, elegant dining, and fast online ordering." />
-    <meta property="og:title" content="Flame Grill Restaurant" />
-    <meta property="og:description" content="The best flame-grilled experience in town." />
-    <meta property="og:type" content="website" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
-    <link rel="stylesheet" href="css/animations.css" />
-  </head>
-  <body>
-    <div class="loading-screen"><div class="loader"></div></div>
-    <a href="#top" class="scroll-top" aria-label="Scroll to top">↑</a>
-    <button class="chat-btn" aria-label="Live chat">💬</button>
-    <a href="https://wa.me/15551234567" class="whatsapp-btn" aria-label="WhatsApp">📲</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flame Grill Restaurant | Premium Grill & BBQ</title>
+  <meta name="description" content="Flame Grill Restaurant offers premium flame-grilled dishes, elegant dining, and fast online ordering." />
+  <meta property="og:title" content="Flame Grill Restaurant" />
+  <meta property="og:description" content="The best flame-grilled experience in town." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  
+  <style>
+    /* ===== CSS VARIABLES / THEME ===== */
+    :root {
+      --bg: #0b0b0b;
+      --surface: #151515;
+      --surface-2: #1f1f1f;
+      --text: #ffffff;
+      --muted: #b8b8b8;
+      --accent: #d62828;
+      --accent-soft: rgba(214, 40, 40, 0.16);
+      --gold: #f4a261;
+      --border: rgba(255,255,255,0.1);
+      --shadow: 0 20px 50px rgba(0,0,0,0.25);
+      --radius: 24px;
+      --transition: 0.3s ease;
+    }
 
-    <header class="site-header" id="top">
+    body.dark {
+      --bg: #f5f3ee;
+      --surface: #ffffff;
+      --surface-2: #f0ebe4;
+      --text: #111111;
+      --muted: #4d4d4d;
+      --accent: #d62828;
+      --gold: #b46a1d;
+      --border: rgba(17,17,17,0.08);
+      --shadow: 0 20px 50px rgba(0,0,0,0.08);
+    }
+
+    /* ===== RESET & BASE ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button, input, select, textarea { font: inherit; }
+    .container { width: min(1200px, calc(100% - 2rem)); margin: 0 auto; }
+    .section { padding: 4rem 0; }
+    .section-dark { background: var(--surface); }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 2.2vw, 2.6rem);
+      margin-bottom: 0.75rem;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      margin-top: 0.5rem;
+    }
+    .section-intro { color: var(--muted); max-width: 700px; margin-bottom: 2rem; }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.5rem; padding: 0.7rem 1.5rem; border-radius: 999px;
+      border: 1px solid transparent; cursor: pointer; transition: var(--transition);
+      font-weight: 600; background: transparent; color: var(--text);
+      font-size: 0.95rem;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #ff4d4d);
+      color: white; box-shadow: var(--shadow);
+    }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+    .btn-outline { border-color: var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-ghost { background: rgba(255,255,255,0.08); color: var(--text); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.15); }
+
+    /* ===== LOADING SCREEN ===== */
+    .loading-screen {
+      position: fixed; inset: 0; background: var(--bg); z-index: 99999;
+      display: grid; place-items: center; transition: opacity 0.5s ease;
+    }
+    .loading-screen.hidden { opacity: 0; pointer-events: none; }
+    .loader {
+      width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.1);
+      border-top-color: var(--accent); border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ===== SCROLL TOP ===== */
+    .scroll-top {
+      position: fixed; right: 1.5rem; bottom: 1.5rem;
+      width: 45px; height: 45px; border-radius: 50%;
+      background: var(--accent); color: white; border: none;
+      font-size: 1.5rem; cursor: pointer; z-index: 50;
+      transform: translateY(120%); transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .scroll-top.show { transform: translateY(0); }
+
+    /* ===== CHAT & WHATSAPP ===== */
+    .chat-btn, .whatsapp-btn {
+      position: fixed; right: 1.5rem; z-index: 50;
+      width: 50px; height: 50px; border-radius: 50%; border: none;
+      display: grid; place-items: center; font-size: 1.5rem;
+      box-shadow: var(--shadow); cursor: pointer; transition: var(--transition);
+    }
+    .chat-btn { bottom: 6rem; background: var(--gold); color: white; }
+    .whatsapp-btn { bottom: 1.5rem; background: #25d366; color: white; }
+    .chat-btn:hover, .whatsapp-btn:hover { transform: scale(1.05); }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(11,11,11,0.85); backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    body.dark .site-header { background: rgba(245,243,238,0.85); }
+
+    .nav-wrap {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 78px; gap: 1rem;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .logo span { color: var(--accent); }
+
+    .main-nav { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .main-nav a, .dropbtn {
+      color: var(--text); background: transparent; border: 0;
+      padding: 0.45rem 0; font-weight: 400;
+      cursor: pointer; transition: color 0.2s;
+      font-size: 0.95rem;
+    }
+    .main-nav a:hover, .dropbtn:hover { color: var(--accent); }
+    .main-nav a.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+
+    .dropdown { position: relative; display: inline-block; }
+    .dropdown-menu {
+      position: absolute; top: calc(100% + 0.7rem); left: 0;
+      min-width: 190px; padding: 0.7rem 0.5rem;
+      border-radius: 16px; background: var(--surface);
+      border: 1px solid var(--border); box-shadow: var(--shadow);
+      display: none; flex-direction: column; z-index: 200;
+    }
+    .dropdown:hover .dropdown-menu,
+    .dropdown.open .dropdown-menu { display: flex; }
+    .dropdown-menu a {
+      padding: 0.45rem 0.9rem; color: var(--text);
+      transition: 0.2s; border-radius: 10px;
+    }
+    .dropdown-menu a:hover {
+      color: var(--accent); background: var(--accent-soft);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
+    .theme-toggle, .menu-toggle {
+      border: 0; background: transparent; color: var(--text);
+      cursor: pointer; font-size: 1.2rem; padding: 0.3rem;
+    }
+    .menu-toggle { display: none; }
+    .mobile-nav {
+      display: none; flex-direction: column; gap: 0.8rem;
+      padding: 1rem 0 1.2rem; border-top: 1px solid var(--border);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { padding: 0.4rem 0; color: var(--text); }
+    .mobile-nav a:hover { color: var(--accent); }
+    .mobile-nav a.active { color: var(--accent); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 90vh; display: flex; align-items: center;
+      background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.4)),
+                  url('https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=1400&q=80') center/cover;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at right top, rgba(214,40,40,0.12), transparent 50%);
+      pointer-events: none;
+    }
+    .hero .container { position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-block; padding: 0.3rem 1rem;
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 999px;
+      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      color: #e0e0e0; max-width: 700px; font-size: 1.15rem;
+      margin-bottom: 2rem; opacity: 0.9;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .hero-stat {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(8px);
+      padding: 1rem; border-radius: 16px;
+      text-align: center;
+    }
+    .hero-stat strong { display: block; font-size: 1.5rem; color: var(--gold); }
+    .hero-stat span { font-size: 0.85rem; color: var(--muted); }
+
+    /* ===== CARDS ===== */
+    .cards-grid {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+      box-shadow: var(--shadow); transition: var(--transition);
+    }
+    .card:hover { transform: translateY(-8px); border-color: var(--accent); }
+    .card img {
+      border-radius: 16px; height: 200px; width: 100%; object-fit: cover;
+      margin-bottom: 1rem;
+    }
+    .card h3 { font-size: 1.2rem; margin-bottom: 0.3rem; }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+    .meta-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 0.7rem;
+    }
+    .price { color: var(--gold); font-weight: 700; font-size: 1.1rem; }
+    .rating { color: var(--gold); }
+
+    /* ===== MENU GRID ===== */
+    .menu-grid {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .menu-card {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1rem;
+      transition: var(--transition);
+    }
+    .menu-card:hover { transform: translateY(-5px); }
+    .menu-card img {
+      border-radius: 16px; height: 160px; width: 100%; object-fit: cover;
+      margin-bottom: 0.5rem;
+    }
+    .badge {
+      display: inline-block; padding: 0.2rem 0.7rem;
+      border-radius: 999px; background: var(--accent-soft);
+      color: var(--accent); font-size: 0.75rem; font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ===== OFFER BANNER ===== */
+    .offer-banner {
+      background: linear-gradient(135deg, var(--accent), #a11a1a);
+      color: white; border-radius: var(--radius); padding: 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .offer-banner .badge { background: rgba(255,255,255,0.2); color: white; }
+    .offer-banner h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; }
+    .offer-banner p { opacity: 0.9; margin-top: 0.3rem; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonial-grid {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .testimonial-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+      text-align: center; transition: var(--transition);
+    }
+    .testimonial-card:hover { transform: translateY(-5px); }
+    .testimonial-card .rating { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .testimonial-card p { color: var(--muted); font-style: italic; margin-bottom: 0.5rem; }
+
+    /* ===== GALLERY ===== */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .gallery-card img {
+      border-radius: var(--radius); height: 220px; width: 100%;
+      object-fit: cover; transition: var(--transition);
+    }
+    .gallery-card img:hover { transform: scale(1.02); }
+
+    /* ===== NEWSLETTER ===== */
+    .newsletter {
+      background: linear-gradient(135deg, rgba(214,40,40,0.12), rgba(244,162,97,0.08));
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 2.5rem; display: flex; justify-content: space-between;
+      align-items: center; gap: 2rem; flex-wrap: wrap;
+    }
+    .newsletter form { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+    .newsletter input {
+      padding: 0.8rem 1.2rem; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); min-width: 280px;
+    }
+    .newsletter input::placeholder { color: var(--muted); }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      padding: 3rem 0 2rem; border-top: 1px solid var(--border);
+      background: var(--surface); margin-top: 2rem;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 2rem; align-items: start;
+    }
+    .footer h3 { font-size: 1rem; margin-bottom: 0.8rem; }
+    .footer-links { display: flex; flex-direction: column; gap: 0.4rem; }
+    .footer-links a, .footer-links span {
+      color: var(--muted); transition: var(--transition);
+      font-size: 0.95rem;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .socials { display: flex; gap: 0.7rem; margin-top: 1rem; }
+    .socials a {
+      width: 40px; height: 40px; display: grid; place-items: center;
+      background: var(--surface-2); border-radius: 50%;
+      color: var(--text); transition: var(--transition);
+    }
+    .socials a:hover { background: var(--accent); color: white; transform: translateY(-3px); }
+    .copyright {
+      padding-top: 1.5rem; margin-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted); font-size: 0.85rem; text-align: center;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 960px) {
+      .main-nav, .nav-actions .btn { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .mobile-nav { display: none; }
+      .mobile-nav.open { display: flex; }
+      .cards-grid, .testimonial-grid, .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .cards-grid, .testimonial-grid, .gallery-grid,
+      .menu-grid, .hero-stats { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero { min-height: auto; padding: 4rem 0 2rem; }
+      .offer-banner { flex-direction: column; text-align: center; }
+      .newsletter { flex-direction: column; text-align: center; }
+      .newsletter input { min-width: 100%; }
+      .hero-stat strong { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== LOADING SCREEN ===== -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loader"></div>
+  </div>
+
+  <!-- ===== SCROLL TO TOP ===== -->
+  <a href="#top" class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</a>
+
+  <!-- ===== CHAT & WHATSAPP ===== -->
+  <button class="chat-btn" aria-label="Live chat">💬</button>
+  <a href="https://wa.me/15551234567" class="whatsapp-btn" aria-label="WhatsApp">📲</a>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="top">
     <div class="container nav-wrap">
-     <a class="logo" href="index.html"><span>Flame</span> Grill</a>
-     <nav class="main-nav" aria-label="Primary navigation">
-      <a href="index.html">Home</a>
+      <a class="logo" href="index.html"><span>Flame</span> Grill</a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="menu.html">Menu</a>
+        <a href="reservation.html">Reservations</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+        <div class="dropdown">
+          <a href="services.html" class="drop-link">Services</a>
+          <button class="dropbtn" aria-expanded="false" aria-label="Toggle services menu">▾</button>
+          <div class="dropdown-menu" hidden>
+            <a href="catering.html">Catering</a>
+            <a href="events.html">Events</a>
+            <a href="delivery.html">Delivery</a>
+            <a href="tracking.html">Tracking</a>
+            <a href="testimonials.html">Testimonials</a>
+          </div>
+        </div>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">☀️</button>
+        <a class="btn btn-ghost" href="login.html">Login</a>
+        <a class="btn btn-outline" href="register.html">Register</a>
+        <a class="btn btn-primary" href="reservation.html">Book Table</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+    <div class="container mobile-nav" id="mobileNav">
+      <a href="index.html" class="active">Home</a>
       <a href="about.html">About</a>
       <a href="menu.html">Menu</a>
       <a href="reservation.html">Reservations</a>
       <a href="gallery.html">Gallery</a>
       <a href="blog.html">Blog</a>
       <a href="contact.html">Contact</a>
-      <div class="dropdown">
-        <a href="services.html" class="drop-link">Services</a>
-        <button class="dropbtn" aria-expanded="false" aria-label="Toggle services menu">▾</button>
-        <div class="dropdown-menu" hidden>
-          <a href="events.html">Catering</a>
-          <a href="events.html">Events</a>
-          <a href="checkout.html">Delivery</a>
-          <a href="tracking.html">Tracking</a>
-          <a href="testimonials.html">Testimonials</a>
-          <a href="terms.html">Terms</a>
-          <a href="privacy.html">Privacy</a>
-          <a href="online-ordering.html">Online-Ordering</a>
-          <a href="faq.html">Faq</a>
-          <a href="events.html">Event</a>
-          <a href="dashboard.html">Dashboard</a>
-          <a href="404.html">404</a>
-        </div>
-      </div>
-    </nav>
-    <div class="nav-actions">
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">☀️</button>
-      <a class="btn btn-ghost" href="login.html">Login</a>
-      <a class="btn btn-outline" href="register.html">Register</a>
-      <a class="btn btn-primary" href="reservation.html">Book Table</a>
-      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">☰</button>
+      <a href="services.html">Services</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
     </div>
-  </div>
-  <div class="container mobile-nav" id="mobile-nav">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="menu.html">Menu</a>
-    <a href="reservation.html">Reservations</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="blog.html">Blog</a>
-    <a href="contact.html">Contact</a>
-    <a href="services.html">Services</a>
-    <a href="login.html">Login</a>
-    <a href="register.html">Register</a>
-  </div>
-</header>
+  </header>
 
-
-
-    <main>
-      <section class="hero">
-        <div class="container hero-content" data-aos="fade-up">
-          <div class="hero-tag">Premium Grill House</div>
-          <h1>The Best Flame-Grilled Experience in Town</h1>
-          <p>Celebrate with expertly grilled steaks, smoky barbecue, and luxurious service in a setting designed for unforgettable evenings.</p>
-          <div class="hero-actions">
-            <a href="reservation.html" class="btn btn-primary">Book a Table</a>
-            <a href="menu.html" class="btn btn-outline">View Menu</a>
-          </div>
-          <div class="hero-stats">
-            <div class="hero-stat"><strong class="count-up" data-target="15" data-suffix="+">0</strong><span>Years Experience</span></div>
-            <div class="hero-stat"><strong class="count-up" data-target="20000" data-prefix="">0</strong><span>Happy Customers</span></div>
-            <div class="hero-stat"><strong class="count-up" data-target="80" data-suffix="+">0</strong><span>Menu Items</span></div>
-            <div class="hero-stat"><strong class="count-up" data-target="50" data-suffix="">0</strong><span>Professional Staff</span></div>
-          </div>
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="hero-tag">Premium Grill House</div>
+        <h1>The Best Flame-Grilled <span>Experience</span> in Town</h1>
+        <p>Celebrate with expertly grilled steaks, smoky barbecue, and luxurious service in a setting designed for unforgettable evenings.</p>
+        <div class="hero-actions">
+          <a href="reservation.html" class="btn btn-primary">Book a Table</a>
+          <a href="menu.html" class="btn btn-outline">View Menu</a>
         </div>
-      </section>
-
-      <section class="section container" data-aos="fade-up">
-        <div class="section-title">Featured Dishes</div>
-        <p class="section-intro">Crafted flame-grilled specialties served with elegant presentation and unforgettable flavor.</p>
-        <div class="cards-grid">
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=900&q=80" alt="Signature steak" loading="lazy" />
-            <h3>Smoked Ribeye</h3>
-            <p>Butter-basted prime ribeye with charred garlic and house glaze.</p>
-            <div class="meta-row"><span class="price">$36</span><span class="rating">★★★★★</span></div>
-          </article>
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=900&q=80" alt="Grilled chicken" loading="lazy" />
-            <h3>Honey Glazed Chicken</h3>
-            <p>Slow-grilled chicken with citrus, herbs, and velvet sauce.</p>
-            <div class="meta-row"><span class="price">$18</span><span class="rating">★★★★★</span></div>
-          </article>
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=80" alt="BBQ burger" loading="lazy" />
-            <h3>Texas BBQ Burger</h3>
-            <p>Double smash burger with caramelized onions and smoked cheddar.</p>
-            <div class="meta-row"><span class="price">$16</span><span class="rating">★★★★★</span></div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section section-dark">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">Popular BBQ Meals</div>
-          <p class="section-intro">Signature favorites popular among guests looking for bold and smoky perfection.</p>
-          <div class="menu-grid">
-            <article class="menu-card">
-              <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="BBQ platter" loading="lazy" />
-              <div class="badge">Chef Pick</div>
-              <h3>BBQ Platter</h3>
-              <p>Smoked ribs, brisket, and grilled wings served with house sides.</p>
-              <div class="meta-row"><span class="price">$29</span><span>980 kcal</span></div>
-            </article>
-            <article class="menu-card">
-              <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" alt="Steak" loading="lazy" />
-              <div class="badge">Hot Seller</div>
-              <h3>Flame Steak</h3>
-              <p>Perfectly seared steak with peppercorn jus and rosemary.</p>
-              <div class="meta-row"><span class="price">$32</span><span>870 kcal</span></div>
-            </article>
-            <article class="menu-card">
-              <img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=800&q=80" alt="Seafood grill" loading="lazy" />
-              <div class="badge">Fresh</div>
-              <h3>Ocean Grill</h3>
-              <p>Charred salmon and prawns with lemon-herb butter.</p>
-              <div class="meta-row"><span class="price">$28</span><span>750 kcal</span></div>
-            </article>
-            <article class="menu-card">
-              <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Pizza" loading="lazy" />
-              <div class="badge">New</div>
-              <h3>Smoky Pizza</h3>
-              <p>Wood-fired pizza with grilled chicken, caramelized onion, and pesto.</p>
-              <div class="meta-row"><span class="price">$19</span><span>810 kcal</span></div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section container" data-aos="fade-up">
-        <div class="offer-banner">
-          <div>
-            <div class="badge">Limited Time</div>
-            <h2>Weekend BBQ Feast Special</h2>
-            <p>Enjoy a complimentary dessert and premium sides with every grilled platter this weekend.</p>
-          </div>
-          <a href="reservation.html" class="btn btn-outline" style="color:white;border-color:white">Reserve Now</a>
-        </div>
-      </section>
-
-      <section class="section container" data-aos="fade-up">
-        <div class="section-title">Customer Reviews</div>
-        <p class="section-intro">Trusted by locals and travelers alike for a polished dining experience.</p>
-        <div class="testimonial-grid">
-          <article class="testimonial-card">
-            <div class="rating">★★★★★</div>
-            <p>“The perfect balance of luxury and comfort. Every dish was smoky, elegant, and memorable.”</p>
-            <strong>Sarah M.</strong>
-          </article>
-          <article class="testimonial-card">
-            <div class="rating">★★★★★</div>
-            <p>“A beautiful restaurant with excellent service and standout steaks.”</p>
-            <strong>David P.</strong>
-          </article>
-          <article class="testimonial-card">
-            <div class="rating">★★★★★</div>
-            <p>“The ambiance is stunning and the menu offers something special for everyone.”</p>
-            <strong>Amara K.</strong>
-          </article>
-        </div>
-      </section>
-
-      <section class="section container" data-aos="fade-up">
-        <div class="section-title">Restaurant Gallery</div>
-        <div class="gallery-grid">
-          <article class="gallery-card"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80" alt="Restaurant interior" loading="lazy" /></article>
-          <article class="gallery-card"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=80" alt="Chef plating" loading="lazy" /></article>
-          <article class="gallery-card"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Dining experience" loading="lazy" /></article>
-        </div>
-      </section>
-
-      <section class="section container" data-aos="fade-up">
-        <div class="newsletter">
-          <div>
-            <div class="section-title">Join Our Newsletter</div>
-            <p>Receive seasonal offers, chef updates, and exclusive dining invites.</p>
-          </div>
-          <form id="newsletter-form">
-            <input type="email" id="newsletter-email" placeholder="Your email address" required />
-            <button class="btn btn-primary" type="submit">Subscribe</button>
-          </form>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container footer-grid">
-        <div>
-          <a class="logo" href="index.html"><span>Flame</span> Grill</a>
-          <p style="color:var(--muted); margin-top:1rem;">Premium BBQ dining, crafted grills, and warm hospitality for every occasion.</p>
-          <div class="socials">
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-          </div>
-        </div>
-        <div>
-          <h3>Quick Links</h3>
-          <div class="footer-links">
-            <a href="about.html">About Us</a>
-            <a href="menu.html">Our Menu</a>
-            <a href="reservation.html">Reservations</a>
-            <a href="contact.html">Contact</a>
-          </div>
-        </div>
-        <div>
-          <h3>Opening Hours</h3>
-          <div class="footer-links">
-            <span>Mon-Thu: 4pm - 11pm</span>
-            <span>Fri-Sat: 4pm - 12am</span>
-            <span>Sunday: 4pm - 10pm</span>
-          </div>
-        </div>
-        <div>
-          <h3>Newsletter</h3>
-          <div class="footer-links">
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="terms.html">Terms & Conditions</a>
-            <a href="faq.html">FAQ</a>
-          </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><strong class="count-up" data-target="15">0</strong><span>Years Experience</span></div>
+          <div class="hero-stat"><strong class="count-up" data-target="20000">0</strong><span>Happy Customers</span></div>
+          <div class="hero-stat"><strong class="count-up" data-target="80">0</strong><span>Menu Items</span></div>
+          <div class="hero-stat"><strong class="count-up" data-target="50">0</strong><span>Professional Staff</span></div>
         </div>
       </div>
-      <div class="container copyright">© 2026 Flame Grill Restaurant. All rights reserved.</div>
-    </footer>
-    <script src="js/main.js"></script>
-    <script src="js/slider.js"></script>
-    <script src="js/validation.js"></script>
+    </section>
 
-  </body>
+    <!-- FEATURED DISHES -->
+    <section class="section container">
+      <div class="section-title">Featured Dishes</div>
+      <p class="section-intro">Crafted flame-grilled specialties served with elegant presentation and unforgettable flavor.</p>
+      <div class="cards-grid">
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=900&q=80" alt="Signature steak" loading="lazy" />
+          <h3>Smoked Ribeye</h3>
+          <p>Butter-basted prime ribeye with charred garlic and house glaze.</p>
+          <div class="meta-row"><span class="price">$36</span><span class="rating">★★★★★</span></div>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=900&q=80" alt="Grilled chicken" loading="lazy" />
+          <h3>Honey Glazed Chicken</h3>
+          <p>Slow-grilled chicken with citrus, herbs, and velvet sauce.</p>
+          <div class="meta-row"><span class="price">$18</span><span class="rating">★★★★★</span></div>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=80" alt="BBQ burger" loading="lazy" />
+          <h3>Texas BBQ Burger</h3>
+          <p>Double smash burger with caramelized onions and smoked cheddar.</p>
+          <div class="meta-row"><span class="price">$16</span><span class="rating">★★★★★</span></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- POPULAR BBQ MEALS -->
+    <section class="section section-dark">
+      <div class="container">
+        <div class="section-title">Popular BBQ Meals</div>
+        <p class="section-intro">Signature favorites popular among guests looking for bold and smoky perfection.</p>
+        <div class="menu-grid">
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="BBQ platter" loading="lazy" />
+            <div class="badge">Chef Pick</div>
+            <h3>BBQ Platter</h3>
+            <p>Smoked ribs, brisket, and grilled wings served with house sides.</p>
+            <div class="meta-row"><span class="price">$29</span><span>980 kcal</span></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" alt="Steak" loading="lazy" />
+            <div class="badge">Hot Seller</div>
+            <h3>Flame Steak</h3>
+            <p>Perfectly seared steak with peppercorn jus and rosemary.</p>
+            <div class="meta-row"><span class="price">$32</span><span>870 kcal</span></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=800&q=80" alt="Seafood grill" loading="lazy" />
+            <div class="badge">Fresh</div>
+            <h3>Ocean Grill</h3>
+            <p>Charred salmon and prawns with lemon-herb butter.</p>
+            <div class="meta-row"><span class="price">$28</span><span>750 kcal</span></div>
+          </article>
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Pizza" loading="lazy" />
+            <div class="badge">New</div>
+            <h3>Smoky Pizza</h3>
+            <p>Wood-fired pizza with grilled chicken, caramelized onion, and pesto.</p>
+            <div class="meta-row"><span class="price">$19</span><span>810 kcal</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFFER BANNER -->
+    <section class="section container">
+      <div class="offer-banner">
+        <div>
+          <div class="badge">Limited Time</div>
+          <h2>Weekend BBQ Feast Special</h2>
+          <p>Enjoy a complimentary dessert and premium sides with every grilled platter this weekend.</p>
+        </div>
+        <a href="reservation.html" class="btn btn-outline" style="color:white;border-color:white">Reserve Now</a>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section container">
+      <div class="section-title">Customer Reviews</div>
+      <p class="section-intro">Trusted by locals and travelers alike for a polished dining experience.</p>
+      <div class="testimonial-grid">
+        <article class="testimonial-card">
+          <div class="rating">★★★★★</div>
+          <p>“The perfect balance of luxury and comfort. Every dish was smoky, elegant, and memorable.”</p>
+          <strong>Sarah M.</strong>
+        </article>
+        <article class="testimonial-card">
+          <div class="rating">★★★★★</div>
+          <p>“A beautiful restaurant with excellent service and standout steaks.”</p>
+          <strong>David P.</strong>
+        </article>
+        <article class="testimonial-card">
+          <div class="rating">★★★★★</div>
+          <p>“The ambiance is stunning and the menu offers something special for everyone.”</p>
+          <strong>Amara K.</strong>
+        </article>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section container">
+      <div class="section-title">Restaurant Gallery</div>
+      <div class="gallery-grid">
+        <article class="gallery-card"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80" alt="Restaurant interior" loading="lazy" /></article>
+        <article class="gallery-card"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=80" alt="Chef plating" loading="lazy" /></article>
+        <article class="gallery-card"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Dining experience" loading="lazy" /></article>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="section container">
+      <div class="newsletter">
+        <div>
+          <div class="section-title">Join Our Newsletter</div>
+          <p>Receive seasonal offers, chef updates, and exclusive dining invites.</p>
+        </div>
+        <form id="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+          <input type="email" id="newsletter-email" placeholder="Your email address" required />
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="logo" href="index.html"><span>Flame</span> Grill</a>
+        <p style="color:var(--muted); margin-top:1rem;">Premium BBQ dining, crafted grills, and warm hospitality for every occasion.</p>
+        <div class="socials">
+          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <a href="menu.html">Our Menu</a>
+          <a href="reservation.html">Reservations</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h3>Opening Hours</h3>
+        <div class="footer-links">
+          <span>Mon-Thu: 4pm - 11pm</span>
+          <span>Fri-Sat: 4pm - 12am</span>
+          <span>Sunday: 4pm - 10pm</span>
+        </div>
+      </div>
+      <div>
+        <h3>Info</h3>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms & Conditions</a>
+          <a href="faq.html">FAQ</a>
+        </div>
+      </div>
+    </div>
+    <div class="container copyright">© 2026 Flame Grill Restaurant. All rights reserved.</div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    (function() {
+      // ----- LOADING SCREEN -----
+      window.addEventListener('load', function() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        if (loadingScreen) {
+          loadingScreen.classList.add('hidden');
+          setTimeout(function() {
+            loadingScreen.style.display = 'none';
+          }, 500);
+        }
+      });
+
+      // ----- THEME TOGGLE -----
+      const themeToggle = document.getElementById('themeToggle');
+      if (themeToggle) {
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+          document.body.classList.add('dark');
+          themeToggle.textContent = '🌙';
+        }
+        themeToggle.addEventListener('click', function() {
+          document.body.classList.toggle('dark');
+          const isDark = document.body.classList.contains('dark');
+          this.textContent = isDark ? '🌙' : '☀️';
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+      }
+
+      // ----- MOBILE MENU -----
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileNav = document.getElementById('mobileNav');
+      if (menuToggle && mobileNav) {
+        menuToggle.addEventListener('click', function() {
+          mobileNav.classList.toggle('open');
+          this.textContent = mobileNav.classList.contains('open') ? '✕' : '☰';
+        });
+        // Close on link click
+        mobileNav.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            mobileNav.classList.remove('open');
+            if (menuToggle) menuToggle.textContent = '☰';
+          });
+        });
+      }
+
+      // ----- DROPDOWN (stable) -----
+      const dropdown = document.querySelector('.dropdown');
+      if (dropdown) {
+        const dropBtn = dropdown.querySelector('.dropbtn');
+        const dropMenu = dropdown.querySelector('.dropdown-menu');
+
+        if (dropBtn && dropMenu) {
+          // Click to toggle
+          dropBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isHidden = dropMenu.hidden;
+            dropMenu.hidden = !isHidden;
+            this.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+          });
+
+          // Hover support (desktop)
+          dropdown.addEventListener('mouseenter', function() {
+            dropMenu.hidden = false;
+            if (dropBtn) dropBtn.setAttribute('aria-expanded', 'true');
+          });
+          dropdown.addEventListener('mouseleave', function() {
+            // Only hide if not open via click
+            if (!dropdown.classList.contains('open')) {
+              dropMenu.hidden = true;
+              if (dropBtn) dropBtn.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          // Close on outside click
+          document.addEventListener('click', function(e) {
+            if (!dropdown.contains(e.target)) {
+              dropMenu.hidden = true;
+              if (dropBtn) dropBtn.setAttribute('aria-expanded', 'false');
+              dropdown.classList.remove('open');
+            }
+          });
+
+          // Close on Escape
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !dropMenu.hidden) {
+              dropMenu.hidden = true;
+              if (dropBtn) dropBtn.setAttribute('aria-expanded', 'false');
+              dropdown.classList.remove('open');
+            }
+          });
+        }
+      }
+
+      // ----- SCROLL TO TOP -----
+      const scrollBtn = document.getElementById('scrollTop');
+      if (scrollBtn) {
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 300) {
+            scrollBtn.classList.add('show');
+          } else {
+            scrollBtn.classList.remove('show');
+          }
+        });
+        scrollBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // ----- COUNT UP ANIMATION -----
+      function animateCountUp(element) {
+        const target = parseInt(element.getAttribute('data-target'));
+        if (isNaN(target)) return;
+        let current = 0;
+        const increment = Math.ceil(target / 60);
+        const timer = setInterval(function() {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          element.textContent = current.toLocaleString();
+        }, 30);
+      }
+
+      // Observe stats when they come into view
+      const stats = document.querySelectorAll('.count-up');
+      if (stats.length) {
+        const observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              if (!el.dataset.animated) {
+                el.dataset.animated = 'true';
+                animateCountUp(el);
+              }
+            }
+          });
+        }, { threshold: 0.5 });
+
+        stats.forEach(function(stat) {
+          observer.observe(stat);
+        });
+      }
+
+    })();
+  </script>
+
+</body>
 </html>
